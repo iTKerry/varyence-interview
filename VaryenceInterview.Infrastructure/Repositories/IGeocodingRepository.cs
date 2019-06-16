@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using VaryenceInterview.Dto;
+using VaryenceInterview.Domain.Responses;
 
 namespace VaryenceInterview.Infrastructure.Repositories
 {
     public interface IGeocodingRepository
     {
-        Task<Coordinates> GetCoordinates(string address);
+        Task<GeocodeResponse> GetGeocode(string address);
     }
 }

@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using VaryenceInterview.Domain.Constants;
+using VaryenceInterview.Domain.Responses;
 using VaryenceInterview.Dto;
 using VaryenceInterview.Infrastructure.Http;
 
@@ -17,12 +19,12 @@ namespace VaryenceInterview.Infrastructure.Repositories
             _httpFetcher = httpFetcher;
         }
 
-        public Task<Coordinates> GetCoordinates(string address)
+        public async Task<GeocodeResponse> GetGeocode(string address)
         {
             var url = string.Format(GoogleApiUrls.GeocodeFromAddress, address, _googleMapsApiKey);
-            var response = _httpFetcher.GetAsString(url);
-            
-            throw new System.NotImplementedException();
+            var jsonResponse = await _httpFetcher.GetAsString(url);
+            var result = JsonConvert.DeserializeObject<GeocodeResponse>(jsonResponse);
+            return result;
         }
     }
 }
