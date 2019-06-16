@@ -2,54 +2,53 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { actionCreators } from '../store/WeatherForecasts';
+import { actionCreators } from '../store/GeolocationCoordinates';
 
 class FetchData extends Component {
   componentDidMount() {
-    // This method is called when the component is first added to the document
     this.ensureDataFetched();
   }
 
   componentDidUpdate() {
-    // This method is called when the route parameters change
     this.ensureDataFetched();
   }
 
   ensureDataFetched() {
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
+    const address = this.props.match.params.address;
+    this.props.requestGeolocationCoordinates(address);
   }
 
   render() {
     return (
       <div>
-        <h1>Weather forecast</h1>
+        <h1>Coordinates</h1>
         <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
-        {renderForecastsTable(this.props)}
-        {renderPagination(this.props)}
+        {renderSearchBar(this.props)}
+        {renderCoordinates(this.props)}
+        {renderButtons(this.props)}
       </div>
     );
   }
 }
 
-function renderForecastsTable(props) {
+function renderSearchBar(props) {
+  //TODO: Implement search bar with search text field
+}
+
+function renderCoordinates(props) {
   return (
     <table className='table table-striped'>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Temp. (C)</th>
-          <th>Temp. (F)</th>
-          <th>Summary</th>
+          <th>Lon</th>
+          <th>Lat</th>
         </tr>
       </thead>
       <tbody>
-        {props.forecasts.map(forecast =>
-          <tr key={forecast.dateFormatted}>
-            <td>{forecast.dateFormatted}</td>
-            <td>{forecast.temperatureC}</td>
-            <td>{forecast.temperatureF}</td>
-            <td>{forecast.summary}</td>
+        {props.coordinates.map(coordinate =>
+          <tr key={coordinate.latitude}>
+            <td>{coordinate.latitude}</td>
+            <td>{coordinate.longitude}</td>
           </tr>
         )}
       </tbody>
@@ -57,18 +56,18 @@ function renderForecastsTable(props) {
   );
 }
 
-function renderPagination(props) {
-  const prevStartDateIndex = (props.startDateIndex || 0) - 5;
-  const nextStartDateIndex = (props.startDateIndex || 0) + 5;
+function renderButtons(props) {
+  const address = "";
+
+  //TODO: Implement buttons!
 
   return <p className='clearfix text-center'>
-    <Link className='btn btn-default pull-left' to={`/fetch-data/${prevStartDateIndex}`}>Previous</Link>
-    <Link className='btn btn-default pull-right' to={`/fetch-data/${nextStartDateIndex}`}>Next</Link>
+    <Link className='btn btn-default pull-left' to={`/fetch-data/${address}`}>Previous</Link>
     {props.isLoading ? <span>Loading...</span> : []}
   </p>;
 }
 
 export default connect(
-  state => state.weatherForecasts,
+  state => state.geolocationCoordinates,
   dispatch => bindActionCreators(actionCreators, dispatch)
 )(FetchData);
