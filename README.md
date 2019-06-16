@@ -1,6 +1,7 @@
 # varyence-interview test project
 
 C# / React task - get geocode data from api (for example GoogleGeocodingApi)
+Estimated time: _3 hours_.
 
 ## Status: Work in progress
 ### BL: _Finished_
