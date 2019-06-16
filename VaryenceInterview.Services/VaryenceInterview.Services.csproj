@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\VaryenceInterview.Dto\VaryenceInterview.Dto.csproj" />
       <ProjectReference Include="..\VaryenceInterview.Infrastructure\VaryenceInterview.Infrastructure.csproj" />
     </ItemGroup>
 

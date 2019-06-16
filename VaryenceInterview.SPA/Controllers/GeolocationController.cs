@@ -1,26 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VaryenceInterview.Services;
 
 namespace VaryenceInterview.SPA.Controllers
 {
-    [Route("api/[controller]")]
-    public class GeocodingController : Controller
+    [Route("api/geolocation")]
+    public class GeolocationController : BaseController
     {
-        private readonly IGeolocationService _geolocationService;
-
-        public GeocodingController(IGeolocationService geolocationService)
+        public GeolocationController(IGeolocationService geolocationService) : base(geolocationService)
         {
-            _geolocationService = geolocationService;
         }
-
+        
         [HttpGet("[action]")]
         public async Task<IActionResult> GetCoordinates([FromQuery] string address)
         {
-            var coordinates = await _geolocationService.GetCoordinates(address);
+            var coordinates = await GeolocationService.GetCoordinates(address);
             if (coordinates == null)
             {
                 return NotFound();

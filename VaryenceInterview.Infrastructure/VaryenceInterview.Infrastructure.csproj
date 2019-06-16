@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\VaryenceInterview.Domain\VaryenceInterview.Domain.csproj" />
-      <ProjectReference Include="..\VaryenceInterview.Dto\VaryenceInterview.Dto.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -3,7 +3,6 @@ using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using VaryenceInterview.Domain.Constants;
 using VaryenceInterview.Domain.Responses;
-using VaryenceInterview.Dto;
 using VaryenceInterview.Infrastructure.Http;
 
 namespace VaryenceInterview.Infrastructure.Repositories
@@ -25,6 +24,12 @@ namespace VaryenceInterview.Infrastructure.Repositories
             var jsonResponse = await _httpFetcher.GetAsString(url);
             var result = JsonConvert.DeserializeObject<GeocodeResponse>(jsonResponse);
             return result;
+        }
+
+        public Task<NearBySearchResponse> GetNearBySearch(double lat, double lng, string searchFilter, int radius)
+        {
+            //TODO: Can be implemented later
+            throw new System.NotImplementedException();
         }
     }
 }
