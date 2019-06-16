@@ -20,6 +20,7 @@ namespace VaryenceInterview.SPA
 
         public void ConfigureServices(IServiceCollection services) =>
             services.AddCustomMvc()
+                    .AddDependencies(_configuration)
                     .AddRouteOptions()
                     .AddSpaStaticFiles(cfg => { cfg.RootPath = "ClientApp/build"; });
         
