@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using VaryenceInterview.Dto;
 using VaryenceInterview.Infrastructure;
+using VaryenceInterview.Infrastructure.Repositories;
 
 namespace VaryenceInterview.Services
 {
